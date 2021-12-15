@@ -314,11 +314,10 @@ Lst/libc_libc_port$(PreprocessSuffix): /home/danman/Projects/W806/w806/SDK/platf
 	@$(CC) $(CFLAGS)$(IncludeCPath) $(PreprocessOnlySwitch) $(OutputSwitch) Lst/libc_libc_port$(PreprocessSuffix) "/home/danman/Projects/W806/w806/SDK/platform/arch/xt804/libc/libc_port.c"
 
 
-$(IntermediateDirectory)/__rt_entry$(ObjectSuffix): $(IntermediateDirectory)/__rt_entry$(DependSuffix)
-	@$(AS) $(SourceSwitch) "$(ProjectPath)/$(IntermediateDirectory)/__rt_entry.S" $(ASFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/__rt_entry$(ObjectSuffix) $(IncludeAPath)
-	@rm -f $(IntermediateDirectory)/__rt_entry.S
-$(IntermediateDirectory)/__rt_entry$(DependSuffix):
-	@$(CC) $(CFLAGS) $(IncludeAPath) -MG -MP -MT$(IntermediateDirectory)/__rt_entry$(ObjectSuffix) -MF$(IntermediateDirectory)/__rt_entry$(DependSuffix) -MM "$(ProjectPath)/$(IntermediateDirectory)/__rt_entry.S"
+$(IntermediateDirectory)/__rt_entry$(ObjectSuffix): __rt_entry$(DependSuffix)
+	@$(AS) $(SourceSwitch) "$(ProjectPath)/__rt_entry.S" $(ASFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/__rt_entry$(ObjectSuffix) $(IncludeAPath)
+__rt_entry$(DependSuffix):
+	@$(CC) $(CFLAGS) $(IncludeAPath) -MG -MP -MT$(IntermediateDirectory)/__rt_entry$(ObjectSuffix) -MF__rt_entry$(DependSuffix) -MM "$(ProjectPath)/__rt_entry.S"
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
